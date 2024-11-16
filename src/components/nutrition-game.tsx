@@ -183,10 +183,8 @@ const NutritionGame = () => {
         >
           <div className="flex items-center justify-center gap-2">
             {isCorrect ? (
-              // eslint-disable-next-line react/no-unescaped-entities
-              <span className="font-bold">Great job! That's correct!</span>
+              <span className="font-bold">Great job! That&apos;s correct!</span>
             ) : (
-              // eslint-disable-next-line react/no-unescaped-entities
               <span className="font-bold">Try again! You can do it!</span>
             )}
           </div>
