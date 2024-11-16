@@ -75,7 +75,6 @@ const NutritionGame = () => {
     },
   ];
 
-  // Updated to use a more specific type instead of "any"
   const handleAnswer = (answer: number | string) => {
     const isAnswerCorrect = answer === levels[currentLevel].correct;
     setIsCorrect(isAnswerCorrect);
