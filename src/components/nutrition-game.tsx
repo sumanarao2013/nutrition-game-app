@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Star, RotateCcw } from 'lucide-react';
+import React, { useState } from "react";
+import { Star, RotateCcw } from "lucide-react";
 
 const NutritionGame = () => {
   const [currentLevel, setCurrentLevel] = useState(0);
@@ -18,11 +18,11 @@ const NutritionGame = () => {
         servingSize: "1 cup (228g)",
         calories: 250,
         fat: "8g",
-        protein: "12g"
+        protein: "12g",
       },
       options: [150, 250, 350],
       correct: 250,
-      hint: "Look for the big number at the top of the label!"
+      hint: "Look for the big number at the top of the label!",
     },
     {
       question: "How many servings are in this container?",
@@ -30,11 +30,11 @@ const NutritionGame = () => {
         servingSize: "1 cup (228g)",
         servingsPerContainer: 2,
         calories: 250,
-        fat: "8g"
+        fat: "8g",
       },
       options: [1, 2, 3],
       correct: 2,
-      hint: "Check the 'Servings Per Container' line!"
+      hint: "Check the 'Servings Per Container' line!",
     },
     {
       question: "Is this food high in protein?",
@@ -42,11 +42,11 @@ const NutritionGame = () => {
         servingSize: "1 cup (228g)",
         calories: 250,
         protein: "20g",
-        dailyValueProtein: "40%"
+        dailyValueProtein: "40%",
       },
       options: ["Yes!", "No"],
       correct: "Yes!",
-      hint: "If it has more than 20% of your daily value, it's high!"
+      hint: "If it has more than 20% of your daily value, it's high!",
     },
     {
       question: "If you eat the whole container, how many calories will you consume?",
@@ -55,11 +55,11 @@ const NutritionGame = () => {
         servingsPerContainer: 2,
         calories: 250,
         sugar: "14g",
-        totalFat: "8g"
+        totalFat: "8g",
       },
       options: [250, 400, 500],
       correct: 500,
-      hint: "Remember to multiply calories by number of servings!"
+      hint: "Remember to multiply calories by number of servings!",
     },
     {
       question: "This snack is low in sugar. True or False?",
@@ -67,31 +67,23 @@ const NutritionGame = () => {
         servingSize: "1 cup (228g)",
         calories: 250,
         sugar: "14g",
-        dailyValueSugar: "28%"
+        dailyValueSugar: "28%",
       },
       options: ["True", "False"],
       correct: "False",
-      hint: "If daily value is more than 20%, it's considered high!"
-    }
+      hint: "If daily value is more than 20%, it's considered high!",
+    },
   ];
 
-  const handleRestart = () => {
-    setCurrentLevel(0);
-    setScore(0);
-    setShowFeedback(false);
-    setIsCorrect(false);
-    setAnsweredCorrectly(new Set());
-    setGameCompleted(false);
-  };
-
-  const handleAnswer = (answer: any) => {
+  // Updated to use a more specific type instead of "any"
+  const handleAnswer = (answer: number | string) => {
     const isAnswerCorrect = answer === levels[currentLevel].correct;
     setIsCorrect(isAnswerCorrect);
     setShowFeedback(true);
-    
+
     if (isAnswerCorrect && !answeredCorrectly.has(currentLevel)) {
       setScore(score + 1);
-      setAnsweredCorrectly(prev => new Set(prev).add(currentLevel));
+      setAnsweredCorrectly((prev) => new Set(prev).add(currentLevel));
     }
 
     setTimeout(() => {
@@ -102,6 +94,15 @@ const NutritionGame = () => {
         setGameCompleted(true);
       }
     }, 2000);
+  };
+
+  const handleRestart = () => {
+    setCurrentLevel(0);
+    setScore(0);
+    setShowFeedback(false);
+    setIsCorrect(false);
+    setAnsweredCorrectly(new Set());
+    setGameCompleted(false);
   };
 
   const currentQuestion = levels[currentLevel];
@@ -141,7 +142,7 @@ const NutritionGame = () => {
           </div>
           <div className="border-t-2 border-black pt-2">
             {Object.entries(currentQuestion.label)
-              .filter(([key]) => !['servingSize', 'calories', 'servingsPerContainer'].includes(key))
+              .filter(([key]) => !["servingSize", "calories", "servingsPerContainer"].includes(key))
               .map(([key, value]) => (
                 <div key={key} className="flex justify-between">
                   <span className="capitalize">{key}</span>
@@ -165,8 +166,8 @@ const NutritionGame = () => {
               onClick={() => handleAnswer(option)}
               className={`p-4 text-lg rounded-lg text-white ${
                 showFeedback && option === currentQuestion.correct
-                  ? 'bg-green-500 hover:bg-green-600'
-                  : 'bg-blue-500 hover:bg-blue-600'
+                  ? "bg-green-500 hover:bg-green-600"
+                  : "bg-blue-500 hover:bg-blue-600"
               }`}
             >
               {option}
@@ -176,12 +177,14 @@ const NutritionGame = () => {
       </div>
 
       {showFeedback && (
-        <div className={`text-center p-4 rounded-lg ${
-          isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-        }`}>
+        <div
+          className={`text-center p-4 rounded-lg ${
+            isCorrect ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+          }`}
+        >
           <div className="flex items-center justify-center gap-2">
             {isCorrect ? (
-              <span className="font-bold">Great job! That's correct!</span>
+              <span className="font-bold">Great job! That&apos;s correct!</span>
             ) : (
               <span className="font-bold">Try again! You can do it!</span>
             )}
